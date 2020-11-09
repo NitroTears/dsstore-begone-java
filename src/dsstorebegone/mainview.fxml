@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="550.0" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: #6EA4BF;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dsstorebegone.Controller">
+   <bottom>
+      <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #41337A;" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Execute" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+            <Label text="A textfile will be created in the local directory of this application." textFill="WHITE" translateX="5.0" />
+        </items>
+      </ToolBar>
+   </bottom>
+   <right>
+      <Pane prefHeight="200.0" prefWidth="310.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="deletedFilesList" editable="false" layoutX="5.0" layoutY="5.0" minHeight="355.0" minWidth="240.0" prefHeight="355.0" prefWidth="290.0" style="-fx-background-color: #41337A;" />
+         </children>
+      </Pane>
+   </right>
+   <left>
+      <VBox minHeight="255.0" minWidth="250.0" prefHeight="255.0" prefWidth="240.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxHeight="35.0" maxWidth="255.0" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label text="Select additional options below." translateX="5.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label text="Click Execute to start the deletion process." translateX="5.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" maxHeight="30.0" prefHeight="25.0" prefWidth="250.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Select a Drive:">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="driveInput" maxWidth="30.0" />
+               </children>
+            </HBox>
+            <Label fx:id="driveInfo" alignment="CENTER" contentDisplay="CENTER" minWidth="250.0" style="-fx-alignment: CENTER;" text="(Please enter a single letter to represent the drive.)" textAlignment="CENTER" textFill="#5c5c5c">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+               <padding>
+                  <Insets left="6.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
