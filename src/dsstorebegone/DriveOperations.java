@@ -8,16 +8,28 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+/**
+ * This class contains all information and methods relevant to deleting files from a drive.
+ * The letter of the drive to be used for these operations is variable, though what specific files will be deleted
+ * will not be. A list of files deleted in an operation will be printed to 'deletedfiles.txt.'
+ */
 public class DriveOperations {
     FileUtils utils = new FileUtils();
     int numOfFiles = 0; //used to count the number of files successfully deleted.
     File drive; //File object containing the drive selected by the user
     File deletedFiles = new File("deletedfiles.txt");
-    String filesListString = "";
+    String filesListString = ""; //string will be used to display all files deleted in the current operation
     BufferedWriter writer = new BufferedWriter(new FileWriter("deletedfiles.txt", true));
 
+    //DriveOperations requires either a drive object in the constructor, or a driveLetter string in initialise().
     public DriveOperations() throws IOException { }
+    //optional drive file can be supplied in constructor, in case of use in other libraries.
+    public DriveOperations(File drive) throws IOException {
+        this.drive = drive;
+    }
 
+    //getters and setters
     public String getFilesListString() {
         return filesListString;
     }
@@ -37,15 +49,15 @@ public class DriveOperations {
         this.drive = drive;
     }
 
-    //Introductory message to the program, not only used for non-GUI use.
+    //Introductory message to the program, only used for non-GUI use.
     public void printStartMessage() {
         System.out.println("You are about to delete all files starting in '._' and .DS_Store files on the selected drive");
         System.out.println("this also includes the folders '.Trashes', '.Spotlight-V100, and '.fseventsd'.");
         System.out.println("Please select your chosen drive with the letter associated with it");
         System.out.println("Operations will begin as soon as drive is selected");
     }
-
-    //creates a path to the drive selected by the user, also creates the 'deletedfiles.txt'.
+    //creates a path to the drive using the string argument, and creates the 'deletedfiles.txt' for use with other methods.
+    //TODO: check to see if drive exists, if not, cease operations.
     public void initialise(String driveLetter) throws IOException {
         try {
             deletedFiles.createNewFile();
@@ -62,8 +74,9 @@ public class DriveOperations {
         }
     }
 
-    //responsible for listing and deleting files that start with ._ in the selected drive.
-    //does not select folders starting with $ as these are usually protected (eg. recycle bin).
+
+    //Lists and deletes files that start with ._ in the selected drive.
+    //does not search folders starting with $ as these are usually protected (eg. recycle bin).
     public void deleteFiles(File drive) throws IOException {
         File[] files = drive.listFiles();
         for (File file : files) {
@@ -73,11 +86,11 @@ public class DriveOperations {
                 System.out.println(file);
                 file.delete();
                 setNumOfFiles(getNumOfFiles() + 1);
-                writer.write(file.toString() + "\n");
+                writer.write(file.toString() + "\r \n");
+                setFilesListString(getFilesListString() + file.toString() + "\r \n");
             }
         }
     }
-
     //lists and deletes the .fseventsd folder, and everything in it.
     //Returns true if the file was successfully deleted, false otherwise.
     public Boolean deleteFseventsd(File drive) throws IOException {
@@ -138,8 +151,7 @@ public class DriveOperations {
             return false;
         }
     }
-
-    // Message stating how many files were deleted, if at all.
+    //Message stating how many files were deleted, if at all.
     //Returns False if no individual files were deleted, true otherwise.
     public Boolean Finish() throws IOException {
         if (numOfFiles > 0) {
