@@ -66,7 +66,7 @@ public class DriveOperations {
             e.printStackTrace();
         }
 
-        if (driveLetter.length() != 1 || !driveLetter.chars().allMatch(Character::isLetter)) {
+        if (!driveLetter.matches("[a-zA-Z]")) {
             System.out.println("Error: Incorrect drive letter input.");
         } else {
             File drive = new File(driveLetter + ":/");

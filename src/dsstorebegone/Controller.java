@@ -26,7 +26,7 @@ public class Controller {
     public void initialize() {
         deletedFilesList.clear();
         startButton.setOnAction((event) -> {
-            if (driveInput.getText().length() != 1 || !driveInput.getText().chars().allMatch(Character::isLetter)) {
+            if (!driveInput.getText().matches("[a-zA-Z]")) {
                 driveInfo.setText("(Incorrect Drive Letter Input)");
 
             } else {
